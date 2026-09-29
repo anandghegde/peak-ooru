@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peak Ooru: the share picture, by itself</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../src/ui/style.css" />
+    <style>
+      html,
+      body {
+        height: auto;
+        overflow: auto;
+      }
+      body {
+        padding: 20px 16px;
+      }
+      .ending-card {
+        position: static;
+        max-width: 760px;
+        margin: 0 auto 20px;
+      }
+      .sizes canvas {
+        display: block;
+        margin: 10px auto;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- For tools/look-share.mjs: a finished game's share card and pictures, drawn as the ending draws them, from the
+         server's copy of the game (?game=&token=), without the rest of the game around it. -->
+    <section class="card ending-card final"><div id="card"></div></section>
+    <div class="sizes"><canvas id="wide"></canvas><canvas id="tall"></canvas></div>
+    <script type="module">
+      import { loadZones, loadZoneOutlines } from '../src/data/zones'
+      import { loadNetwork } from '../src/data/network'
+      import { loadTransit } from '../src/data/transit'
+      import { cityEdge } from '../src/map/frame'
+      import { RING } from '../src/map/network'
+      import { fromWire } from '../src/rules/wire'
+      import { drawShare, fontsReady, shareCard, shareWords } from '../src/share/index'
+
+      const q = new URLSearchParams(location.search)
+      const id = q.get('game')
+      const token = q.get('token')
+      const auth = { authorization: `Bearer ${token}` }
+      const [zones, outlines, network, transit, city] = await Promise.all([
+        loadZones(), loadZoneOutlines(), loadNetwork(), loadTransit(),
+        fetch(`/api/games/${id}/city`, { headers: auth }).then((r) => r.json()),
+      ])
+      const game = fromWire(city.state)
+      const board = await fetch(`/api/board?count=1`, { headers: auth }).then((r) => r.json())
+      // As main.ts builds the ending's picture, less the lakes, which come from the map's tiles.
+      const mine = new Set((game.built?.lines ?? []).map((l) => l.id))
+      const lines = [...transit.lines, ...(game.built?.lines ?? []).filter((l) => !transit.lines.some((t) => t.id === l.id))]
+        .filter((l) => l.kind !== 'rail' || mine.has(l.id))
+        .map((l) => ({ path: l.path, colour: l.colour, mine: mine.has(l.id), dashed: l.status !== 'open' }))
+      const picture = {
+        edge: cityEdge(outlines, new Set(zones.filter((z) => z.ward).map((z) => z.id))),
+        rings: network.links.filter((l) => l.name && RING.test(l.name)).map((l) => l.line),
+        lines,
+        roads: (game.built?.roads ?? []).map((r) => r.path),
+      }
+      const input = {
+        game, id, picture,
+        name: city.player.name,
+        rank: board.mine ? { rank: board.mine.rank, total: board.total } : null,
+        upload: async (png) => {
+          const r = await fetch(`/api/games/${id}/picture`, { method: 'PUT', headers: { ...auth, 'content-type': 'image/png' }, body: png })
+          window.uploaded = { status: r.status, body: await r.json(), bytes: png.size }
+        },
+      }
+      shareCard(document.getElementById('card'), input)
+      await fontsReady()
+      drawShare(document.getElementById('wide'), shareWords(input), picture, 'wide')
+      drawShare(document.getElementById('tall'), shareWords(input), picture, 'tall')
+      window.words = shareWords(input)
+      window.done = true
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+[Unit]
+Description=Peak Ooru store backup, nightly
+
+[Timer]
+# 03:30 in India, when fewest play.
+OnCalendar=*-*-* 22:00:00 UTC
+Persistent=true
+
+[Install]
+WantedBy=timers.target

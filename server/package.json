@@ -1,0 +1,20 @@
+{
+  "name": "peak-ooru-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "The Peak Ooru server: players, games kept and worked out, seasons, the board. Uses the esbuild and vitest of the game's own package, one folder up.",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node dev.mjs",
+    "start": "node dist/main.js",
+    "check": "tsc -p tsconfig.json",
+    "test": "node build.mjs && vitest run --config vitest.config.ts",
+    "season": "node build.mjs && node dist/cli.js season",
+    "verify": "node build.mjs && node dist/cli.js verify",
+    "fill": "node build.mjs && node dist/cli.js fill",
+    "backup": "node dist/cli.js backup",
+    "load": "node build.mjs && node dist/load.js"
+  }
+}

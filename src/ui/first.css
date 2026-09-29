@@ -1,0 +1,180 @@
+/* The first day (slice 9, F): the introduction's rings, "What could I do now?", levers arriving, the day's end. */
+
+.first-card {
+  z-index: 7;
+}
+.first-card .first-words {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+.first-said {
+  color: var(--muted);
+}
+.first-card .outlook-buttons {
+  flex-wrap: wrap;
+}
+
+/* A place on the map to tap: a quiet ring with its name, which lets taps through to the map. */
+.first-rings {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.first-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+.first-ring i {
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 3px solid #1f4a50;
+  background: rgba(31, 74, 80, 0.08);
+  animation: first-breathe 1.8s ease-in-out infinite;
+}
+.first-ring.later i {
+  border: 2px dashed rgba(31, 74, 80, 0.55);
+  background: none;
+  animation: none;
+}
+.first-ring-name {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f4a50;
+  background: rgba(255, 253, 249, 0.92);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.first-ring.later .first-ring-name {
+  font-weight: 500;
+  color: var(--muted);
+}
+@keyframes first-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .first-ring i {
+    animation: none;
+  }
+}
+
+/* "What could I do now?": a button in the bar, and a card of three ideas. A finger's reach on a phone. */
+@media (max-width: 600px) {
+  .bar .what-now {
+    min-height: 44px !important;
+  }
+}
+.bar .what-now {
+  margin: 0;
+  align-self: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(38, 35, 31, 0.18);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.advice {
+  z-index: 6;
+  width: min(380px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 14px 16px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.advice h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.advice > p {
+  margin: 0 0 10px;
+}
+.advice-item {
+  border-top: 1px solid var(--edge);
+  padding: 8px 0 6px;
+}
+.advice-item strong {
+  display: block;
+  font-size: 14px;
+}
+.advice-item p {
+  margin: 2px 0 4px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.advice-item .advice-sums {
+  color: var(--muted);
+  font-size: 13px;
+}
+.advice-item .outlook-buttons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.advice-item .outlook-buttons button {
+  min-height: 40px;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .advice-item .outlook-buttons button {
+    min-height: 44px;
+  }
+}
+
+/* What the player's own acts did, at the head of the report. */
+.report-yours {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(31, 74, 80, 0.06);
+}
+.report-yours h3 {
+  margin: 0 0 4px;
+}
+.report-yours ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.report-yours li {
+  margin: 4px 0;
+}
+
+/* A lever arriving, said once, at the head of its page and of the report. */
+.arrived {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(31, 74, 80, 0.06);
+  font-size: 14px;
+}
+.show-all {
+  margin-top: 8px;
+}
+
+/* The first day's end. */
+.day-end .ending-card ul {
+  padding-left: 18px;
+}
+.day-end .ending-card li {
+  margin: 4px 0;
+}
+.viewing .what-now {
+  display: none;
+}

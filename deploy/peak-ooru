@@ -1,0 +1,8 @@
+#!/bin/sh
+# The server's commands on the machine, run as the service's user with its settings. Copy to /usr/local/bin/peak-ooru.
+#   sudo peak-ooru season list
+#   sudo peak-ooru season open open --name "First season" --opens 2026-11-01T00:00:00+05:30
+#   sudo peak-ooru season close
+#   sudo peak-ooru verify
+#   sudo peak-ooru backup /var/lib/peak-ooru/backups/now.db
+exec sudo -u peakooru sh -c 'set -a; . /etc/peak-ooru.env; set +a; cd /srv/peak-ooru/server && exec /usr/bin/node dist/cli.js "$@"' peak-ooru "$@"

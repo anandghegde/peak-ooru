@@ -1,0 +1,12 @@
+# A copy of the store each night, taken while the service runs, keeping the last fourteen. With
+# deploy/peak-ooru-backup.timer, in /etc/systemd/system/; `systemctl enable --now peak-ooru-backup.timer`.
+[Unit]
+Description=Peak Ooru store backup
+
+[Service]
+Type=oneshot
+User=peakooru
+Group=peakooru
+WorkingDirectory=/srv/peak-ooru/server
+EnvironmentFile=/etc/peak-ooru.env
+ExecStart=/bin/sh -c 'mkdir -p /var/lib/peak-ooru/backups && /usr/bin/node dist/cli.js backup /var/lib/peak-ooru/backups/peak-ooru-$(date -u +%%Y-%%m-%%d).db && gzip -f /var/lib/peak-ooru/backups/peak-ooru-$(date -u +%%Y-%%m-%%d).db && ls -1t /var/lib/peak-ooru/backups/peak-ooru-*.db.gz | tail -n +15 | xargs -r rm -f'

@@ -1,0 +1,11 @@
+node_modules
+dist
+tools/shots
+tools/data
+.data
+pictures
+.serena
+.DS_Store
+*.log
+.env
+.env.*

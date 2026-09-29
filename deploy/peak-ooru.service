@@ -1,0 +1,33 @@
+# Peak Ooru's server. Copy to /etc/systemd/system/peak-ooru.service, then `systemctl daemon-reload` and
+# `systemctl enable --now peak-ooru`. Its settings are in /etc/peak-ooru.env (deploy/peak-ooru.env).
+[Unit]
+Description=Peak Ooru game server
+After=network.target
+
+[Service]
+Type=simple
+User=peakooru
+Group=peakooru
+WorkingDirectory=/srv/peak-ooru/server
+EnvironmentFile=/etc/peak-ooru.env
+ExecStart=/usr/bin/node --enable-source-maps dist/main.js
+Restart=always
+RestartSec=2
+# Worker threads end their month before the service stops; a month is well under a second.
+TimeoutStopSec=15
+
+# It needs to write only its store.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/peak-ooru
+# A bound on its memory, so that a fault cannot take the other sites' memory: about 350 MB a worker, and 200 MB more.
+MemoryMax=1600M
+
+[Install]
+WantedBy=multi-user.target
