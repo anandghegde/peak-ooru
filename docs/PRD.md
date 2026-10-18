@@ -467,9 +467,9 @@ Each slice can be looked at and judged before the next begins.
 | 5 | **Roads and policy** (built 2026-09-29; turn bans left out; a player who uses every lever ends 6.6 minutes ahead of doing nothing, one who builds metro alone 2.7; doing nothing is the best liked; **player review pending**) | Roads, flyovers, signals, footpaths, one-way, turn bans, denser building, speed limits, dig once | Every lever moves at least one measure, and costs another |
 | 6 | **Road condition and upkeep** (built 2026-09-29; mending a short stretch can come out slower in the forecast; doing nothing ends rich; **player review pending**) | Decay, monsoon, the four upkeep levers, the road condition view | Neglect visibly slows the city; repair visibly helps; the report says by how much |
 | 7 | **The score** (built 2026-09-29; the city starts at about 550, not 400; a late rush of spending scores too well; a month takes 265 ms, over the limit on a mid-range laptop; **player review pending**) | Seven measures, marks, explanations, approval, reviews, events, endings | Scripted plays: doing nothing scores about 350, building well 700 or more, carelessly under 300 |
-| 8 | **Online** (built 2026-09-29, running locally on port 5210, not deployed; every year now counts towards the score, later years more; a month takes 229 ms; sign-in never tried against a real mail provider or Google; whether the ranked board needs sign-in is undecided; **player review pending**) | Accounts, games kept on the server, checking, daily allowance, seasons, leaderboard | A changed browser cannot produce a false score |
+| 8 | **Online** (built 2026-09-29; online at peakooru.in since 2026-10-18, with three workers; every year now counts towards the score, later years more; a month takes 229 ms; sign-in never tried against a real mail provider or Google; whether the ranked board needs sign-in is undecided; **player review pending**) | Accounts, games kept on the server, checking, daily allowance, seasons, leaderboard | A changed browser cannot produce a false score |
 | 9 | **Fit to play** (built 2026-09-29; a scripted new player ends a first day at 612 against 515 for doing nothing; rules version 7, the city starts at 561; sound never heard; no real phone and no real player yet, so the slice's own check is not met; **player review pending**) | Introduction, phone layout, other players' cities, share picture, sound | Five new players finish a first day without help |
-| 10 | **First season** | A closed season with invited players | G-1 to G-5 measured |
+| 10 | **First season** (opened 2026-10-18 at peakooru.in as `first-2026-10-18`, daily allowance off, closes 2026-11-15; no players invited yet; email and Google sign-in not set up) | A closed season with invited players | G-1 to G-5 measured |
 
 ## 18. Risks
 
@@ -491,9 +491,9 @@ Each slice can be looked at and judged before the next begins.
 
 1. **Zones.** Settled in slice 1: the Greater Bengaluru Authority's 369 wards as notified on 19 November 2025, from OpenCity, plus 42 coarse outer zones, 411 in all. People, jobs and income are estimates; see `docs/DATA.md`. Still open: corporation elections have not been held, so the boundaries could change.
 2. **OpenStreetMap share-alike.** Whether the vector tiles and the built network must be published under the same licence.
-3. **Hosting.** Settled: the player's Linode. Still open: how many players one machine carries, since the server works out every month of every game; measured in slice 8.
+3. **Hosting.** Settled: the player's Linode, where the game runs from 2026-10-18 beside the player's other sites. Still open: how many players one machine carries, since the server works out every month of every game; measured in slice 8.
 4. **Kannada.** The name, place names we write ourselves, and interface text need a native speaker's check.
-5. **Name.** On 2026-09-28 a registry lookup found `peakooru.com`, `peakooru.in` and `peakooru.game` unregistered; `peakooru.app` gave no answer. None has been bought. Social handles and trademarks are not checked.
+5. **Name.** On 2026-09-28 a registry lookup found `peakooru.com`, `peakooru.in` and `peakooru.game` unregistered; `peakooru.app` gave no answer. `peakooru.in` has since been taken and is the game's address. Social handles and trademarks are not checked.
 6. **The five districts.** Whether any of the NamDaari scenarios stay as a practice mode.
 7. **Money.** Whether the game ever earns anything, and how, given that nothing paid may touch the score.
 8. **Moderation.** Who handles names and reports, once there are players.
@@ -523,4 +523,7 @@ Each slice can be looked at and judged before the next begins.
 | 2026-09-29 | Hosted on the player's own Linode | Player |
 | 2026-09-28 | Each player has their own copy of the city | Player |
 | 2026-09-28 | Full play on phones from the start, with tap-and-snap placement | Player |
+| 2026-09-29 | The game's address is peakooru.in, with www | Player |
+| 2026-10-18 | Three workers on the Linode, leaving room for the other sites on it | Proposed; the player did not object |
+| 2026-10-18 | The first season opens with the daily allowance off, for 28 days | Proposed; the player opened it |
 | 2026-09-28 | Peak Ooru replaces NamDaari | Player |
